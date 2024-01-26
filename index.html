@@ -1,0 +1,106 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Upload</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            display: inline-block;
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        label:hover {
+            background-color: #2980b9;
+        }
+
+        button {
+            display: inline-block;
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #27ae60;
+        }
+
+        #result-table {
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            background-color: #fff; /* Set cell color to white */
+        }
+
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .file-indicator {
+            display: none;
+            color: #27ae60;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <label for="csv-file" id="upload-csv-label">Upload CSV</label>
+    <input type="file" id="csv-file" accept=".csv" onchange="showFileIndicator()" />
+    <button onclick="processCSV()">Generate</button>
+    <div id="file-indicator" class="file-indicator">CSV file uploaded: <span id="file-name"></span></div>
+    <div id="result-table"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <script src="app.js"></script>
+    <script>
+        function showFileIndicator() {
+            const fileInput = document.getElementById("csv-file");
+            const fileIndicator = document.getElementById("file-indicator");
+            const fileNameSpan = document.getElementById("file-name");
+
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                fileNameSpan.textContent = fileName;
+                fileIndicator.style.display = "block";
+            } else {
+                fileIndicator.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
